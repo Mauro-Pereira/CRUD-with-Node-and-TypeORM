@@ -22,4 +22,14 @@ export const getAuthorById = async (request:Request,response:Response) =>{
 
 export const deleteAuthor = async (request:Request,response:Response) =>{
         
+    const {id} = request.params;
+    const authorDeleted = await getRepository(Author).delete(id);
+    return response.status(200).json(authorDeleted);
+}
+
+export const updateAuthor = async (request:Request,response:Response) =>{
+    const {id} = request.params;
+    const {firstName,lastName,age,email} = request.body;
+    const updatedAuthor = await getRepository(Author).update(id,{firstName:firstName,lastName:lastName,age:age,email:email});
+    return response.status(200).json(updatedAuthor);
 }
