@@ -1,35 +1,34 @@
 import {getRepository} from 'typeorm';
 import {Author} from '../entity/Author';
 import {Request,Response} from 'express';
+import { AuthorDAO } from '../UseCases/AuthorDAO/AuthorDAO';
 
 
 export const saveAuthor = async (request:Request,response:Response) =>{
 
-    const author = await getRepository(Author).save(request.body);
-    return response.status(201).json(author);
+    const authorSave = new AuthorDAO()
+    return authorSave.saveAuthor(request,response);
 }
 
 export const getAuthor = async (request:Request,response:Response) =>{
-    const getAuthor = await getRepository(Author).find();
-    return response.status(200).json(getAuthor);
+    const authorGet = new AuthorDAO();
+    return authorGet.getAuthor(request,response)
 }
 
 export const getAuthorById = async (request:Request,response:Response) =>{
-   const {id} = request.params;
-    const author  = await getRepository(Author).findOne(id)
-    return response.status(200).json(author);
+    const authot_getById = new AuthorDAO();
+    return authot_getById.getAuthorById(request,response)
 }
 
 export const deleteAuthor = async (request:Request,response:Response) =>{
         
-    const {id} = request.params;
-    const authorDeleted = await getRepository(Author).delete(id);
-    return response.status(200).json(authorDeleted);
+    const authorDelete = new AuthorDAO();
+    return authorDelete.deleteAuthor(request,response);
 }
 
 export const updateAuthor = async (request:Request,response:Response) =>{
-    const {id} = request.params;
-    const {firstName,lastName,age,email} = request.body;
-    const updatedAuthor = await getRepository(Author).update(id,{firstName:firstName,lastName:lastName,age:age,email:email});
-    return response.status(200).json(updatedAuthor);
+    const authorUpdate = new AuthorDAO();
+    return authorUpdate.updateAuthor(request,response);
+
+
 }
