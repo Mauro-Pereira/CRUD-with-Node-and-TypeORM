@@ -7,14 +7,14 @@ router.get("/",(request:Request,response:Response) =>{
     return response.status(200).json("hello world")
 });
 
-router.post("/saveAuthor",(request:Request,response:Response)=> saveAuthor);
+router.post("/saveAuthor",(request:Request,response:Response)=> saveAuthor(request,response));
 
-router.get("/getAuthor",(request:Request,response:Response)=> getAuthor);
+router.get("/getAuthor",(request:Request,response:Response)=> getAuthor(request,response));
 
-router.get("/getAuthorById",(request:Request,response:Response)=> getAuthorById);
+router.get("/getAuthorById/:id",(request:Request,response:Response)=> getAuthorById(request,response));
 
-router.post("/deleteAuthor:id",(request:Request,response:Response)=> deleteAuthor);
+router.delete("/deleteAuthor/:id",(request:Request,response:Response)=> deleteAuthor(request,response));
 
-router.post("/updateAuthor:id",(request:Request,response:Response)=> updateAuthor);
+router.put("/updateAuthor/:id",(request:Request,response:Response)=> updateAuthor(request,response));
 
 export default router;
